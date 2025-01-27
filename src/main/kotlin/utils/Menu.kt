@@ -1,14 +1,14 @@
 package org.es.blognoticias.utils
 
 import org.es.blognoticias.dbConnection.MongoDB
-import org.es.blognoticias.gestor.GestorNoticias
+import org.es.blognoticias.gestores.GestorBlog
 
 
 /**
  * Clase que representa el menú principal de la aplicación.
  */
 class Menu(
-    private val gestorNoticias: GestorNoticias,
+    private val gestorBlog: GestorBlog,
     private val consola: Consola
 ) {
     /**
@@ -45,13 +45,13 @@ class Menu(
             opc = pedirOpcion(1, 8)
 
             when (opc) {
-                1 -> gestorNoticias.publicarNoticia()
-                2 -> gestorNoticias.escribirComentario()
-                3 -> gestorNoticias.registrarUsuario()
-                4 -> gestorNoticias.listarNoticiasDeUsuario()
-                5 -> gestorNoticias.listarComentariosDeNoticia()
-                6 -> gestorNoticias.buscarNoticiasPorTag()
-                7 -> gestorNoticias.listarUltimasDiezNoticias()
+                1 -> gestorBlog.publicarNoticia()
+                2 -> gestorBlog.escribirComentario()
+                3 -> gestorBlog.registrarUsuario()
+                4 -> gestorBlog.listarNoticiasDeUsuario()
+                5 -> gestorBlog.listarComentariosDeNoticia()
+                6 -> gestorBlog.buscarNoticiasPorTag()
+                7 -> gestorBlog.listarUltimasDiezNoticias()
                 8 -> {
                     consola.imprimirMsj("Saliendo del programa...")
                     MongoDB.cerrarConexion()
@@ -75,6 +75,4 @@ class Menu(
         consola.imprimirMsj("7.- Listar ultimas 10 noticias")
         consola.imprimirMsj("8.- Salir")
     }
-
-
 }

@@ -8,7 +8,7 @@ import io.github.cdimascio.dotenv.dotenv
 object MongoDB {
     private val dotenv = dotenv()
     private val connectString = dotenv["URL_MONGODB"]
-    private const val DB_NAME = "adrianag_gestionjuegos"
+    private const val DB_NAME = "blognoticias"
 
 
     // Configuramos la uri del cluster
