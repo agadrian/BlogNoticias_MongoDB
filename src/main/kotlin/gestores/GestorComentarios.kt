@@ -29,7 +29,6 @@ class GestorComentarios(
             texto,
             fechaHora
         )
-
     }
 
     /**

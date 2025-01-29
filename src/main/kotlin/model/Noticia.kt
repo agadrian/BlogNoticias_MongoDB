@@ -4,7 +4,7 @@ data class Noticia(
     val titulo: String,
     val cuerpo: String,
     val fechaPub: String,
-    var autor: String,
+    val autor: String,
     val tags: List<String>
 ){
     override fun toString(): String {

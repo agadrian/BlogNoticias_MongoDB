@@ -66,8 +66,9 @@ class GestorNoticias(
     }
 
 
-
-
+    /**
+     * Mostrar las noticias de un usuario en concreto
+     */
     fun listarNoticiasUsuario(usuario: Usuario){
         val noticias = getNoticiasByUser(usuario)
         noticias.forEachIndexed {index, noticia ->
@@ -76,6 +77,9 @@ class GestorNoticias(
     }
 
 
+    /**
+     * Obtener las noticias que ha publicado un usuario en concreto.
+     */
     private fun getNoticiasByUser(usuario: Usuario): List<Noticia>{
         val noticias = colNoticias.find(Filters.eq("autor", usuario._id)).toList()
         if (noticias.isEmpty()) throw NotFoundException("No se ha encontrado ninguna noticia de este autor")
@@ -83,6 +87,9 @@ class GestorNoticias(
     }
 
 
+    /**
+     * Obtener las noticias que tengan un tag en concreto
+     */
     fun getNoticiaByTag(){
         val tag = consola.pedirString("Introduce tag: ")
         val noticias = colNoticias.find(Filters.eq("tags", tag)).toList().ifEmpty { throw NotFoundException("No se ha encontrado noticias con el tag '$tag'") }
@@ -94,8 +101,6 @@ class GestorNoticias(
 
 
     /**
-     * TODO: Comentar en el pdf que lo hago asi para que salga con el formato que quiero, tanto en codigo como en la BD, aunque sea un poco menos eficiente.
-     * TODO: La forma eficiente seria usando Date a la hora de introducir y obtener registros en Mongo.
      * Muestra por consola las 10 ultimas noticias
      */
     fun listarUltimasDiezNoticias(){
@@ -105,7 +110,4 @@ class GestorNoticias(
             consola.imprimirMsj("\n===== Noticia ${index+1} ===== $noticia")
         }
     }
-
-
-
 }
