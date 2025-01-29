@@ -71,7 +71,7 @@ class Menu(
         consola.imprimirMsj("3.- Registrar usuario")
         consola.imprimirMsj("4.- Listar noticias de un usuario")
         consola.imprimirMsj("5.- Listar comentarios de una noticia")
-        consola.imprimirMsj("6.- Buscar noticias por etiquetas")
+        consola.imprimirMsj("6.- Buscar noticias por etiqueta")
         consola.imprimirMsj("7.- Listar ultimas 10 noticias")
         consola.imprimirMsj("8.- Salir")
     }

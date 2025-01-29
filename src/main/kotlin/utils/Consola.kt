@@ -1,6 +1,7 @@
 package org.es.blognoticias.utils
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class Consola {
@@ -22,6 +23,19 @@ class Consola {
             }
         }while (str.isBlank())
         return str
+    }
+
+    fun pedirListaStrings(msg: String): List<String>{
+        imprimirMsj(msg, false)
+
+        val input = readln().trim()
+
+        return if (input.isBlank()){
+            emptyList()
+        }else {
+            // Seprar por coma y quitar espacios
+            input.split(",").map { it.trim() }
+        }
     }
 
     fun pedirInt(msg: String): Int{
@@ -77,4 +91,6 @@ class Consola {
 
         return fechaValida.format(formatter)
     }
+
+
 }

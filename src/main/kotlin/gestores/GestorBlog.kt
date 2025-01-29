@@ -1,7 +1,5 @@
 package org.es.blognoticias.gestores
 
-import com.mongodb.client.MongoCollection
-import org.bson.Document
 import org.es.blognoticias.utils.Consola
 
 class GestorBlog(
@@ -11,13 +9,19 @@ class GestorBlog(
     private val consola: Consola
 ) {
 
-
     fun publicarNoticia(){
         try {
-            val emailUsuarioPublicador = gestorUsuarios.getUsuarioEmailOrNull()
-            val docDatosNoticia = gestorNoticias.pedirDatosNoticia().append("autor", emailUsuarioPublicador)
-            gestorNoticias.insertarNoticia(docDatosNoticia)
+            // Elegir usuario
+            val usuario = gestorUsuarios.getUsuario()
 
+            // Comprobar que el estado es apto para publicar (UNBANNED_ACTIVO)
+            gestorUsuarios.checkUsuarioEstado(usuario)
+
+            // Obtener noticia
+            val noticia = gestorNoticias.pedirDatosNoticia(autor = usuario._id)
+
+            // Insertarla
+            gestorNoticias.insertarNoticia(noticia)
         }catch (e:Exception){
             consola.imprimirMsj("ERROR - ${e.message}")
         }
@@ -25,42 +29,72 @@ class GestorBlog(
 
 
     fun escribirComentario(){
+        try {
+            // Elegir usuario
+            val usuario = gestorUsuarios.getUsuario()
 
+            // Elegir noticia
+            val dateNoticia = gestorNoticias.getNoticiaDate()
+
+            // Se obtiene los datos del cometario ya comprobados
+            val comentario = gestorComentarios.pedirDatosCometario(usuario._id, dateNoticia)
+
+            // Insertar el comentario
+            gestorComentarios.insertarComentario(comentario)
+        }catch (e:Exception){
+            consola.imprimirMsj("ERROR - ${e.message}")
+        }
     }
 
 
     fun registrarUsuario(){
+        try {
+            // Obtener usuario
+            val usuario = gestorUsuarios.pedirDatosUsuario()
+
+            // Insertarlo
+            gestorUsuarios.insertarUsuario(usuario)
+        }catch (e:Exception){
+            consola.imprimirMsj("ERROR - ${e.message}")
+        }
 
     }
 
 
     fun listarNoticiasDeUsuario(){
+        try {
+            val usuario = gestorUsuarios.getUsuario()
+            gestorNoticias.listarNoticiasUsuario(usuario)
 
+        }catch (e:Exception){
+            consola.imprimirMsj("ERROR - ${e.message}")
+        }
     }
 
 
     fun listarComentariosDeNoticia(){
+        try {
+            // Obtener la fecha de la noticia
+            val dateNoticia = gestorNoticias.getNoticiaDate()
 
+            // Filtro en la tabla de comentarios con esa fecha
+            gestorComentarios.mostrarComentariosNoticia(dateNoticia)
+        }catch (e: Exception){
+            consola.imprimirMsj("ERROR - ${e.message}")
+        }
     }
 
 
     fun buscarNoticiasPorTag(){
-
+        try {
+            gestorNoticias.getNoticiaByTag()
+        }catch (e: Exception){
+            consola.imprimirMsj("ERROR - ${e.message}")
+        }
     }
 
 
     fun listarUltimasDiezNoticias(){
-
+        gestorNoticias.listarUltimasDiezNoticias()
     }
-
-
-
-
-
-
-
-
-
-
-
 }
