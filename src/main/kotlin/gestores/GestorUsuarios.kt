@@ -43,7 +43,6 @@ class GestorUsuarios(
 
         if (checkUsernameExists(userName)) throw UsuarioAlreadyExists("Ya existe un usuario con este nombre de usuario.")
 
-        // TODO (Hacer telefonos en lista)
         val telefonos = consola.pedirListaStrings("Introduce telefono/s (en caso de varios, separados por coma (6660060006,6060066006)): ")
 
         return Usuario(
