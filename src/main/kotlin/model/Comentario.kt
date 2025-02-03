@@ -1,9 +1,8 @@
 package org.es.blognoticias.model
 
-
 data class Comentario(
-    val usuario: String, // Id del Usuario
-    val noticia: String, // Id de Noticia
+    val usuario: String, // Id del Usuario (email)
+    val noticia: String, // Id de Noticia (fecha)
     val texto: String,
     val fechaHora: String,
 ){

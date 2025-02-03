@@ -22,7 +22,6 @@ class GestorComentarios(
 
         val texto = consola.pedirString("Introduce el contenido del comentario: ")
 
-
         return Comentario(
             idAutor,
             idNoticia,
@@ -53,6 +52,4 @@ class GestorComentarios(
             consola.imprimirMsj("*** Comentario ${index + 1} *** $com\n")
         }
     }
-
-
 }
